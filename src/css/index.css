@@ -12,12 +12,12 @@ code {
 		monospace;
 }
 
-.booyah-box {
+.App-box {
 	box-shadow: -10px 10px 10px rgba(109, 109, 109, 0.3);
 	-moz-box-shadow: -10px 10px 10px rgba(109, 109, 109, 0.3);
 	-webkit-box-shadow: -10px 10px 10px rgba(109, 109, 109, 0.3);
 	-o-box-shadow: -10px 10px 10px rgba(109, 109, 109, 0.3);
-	background: rgb(183, 217, 236);
+	background: rgb(196, 220, 235);
 	border: 1px solid #ccc;
 	border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
 	padding: 3%;

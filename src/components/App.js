@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import "../css/App.css";
 import $ from "jquery";
 
-import SearchHouses from "./SearchHouses";
-import AddHouse from "./AddHouse";
+import SearchProperties from "./SearchProperties";
+
+// import SearchHouses from "./SearchHouses";
+// import AddHouse from "./AddHouse";
 
 class App extends Component {
 	constructor() {
@@ -35,12 +37,26 @@ class App extends Component {
 	}
 
 	render() {
+		// var address =
+		// 	"https://www.google.com/maps/search/?api=1&map_action=map&center&basemap=satellite&zoom=21&query=3021+Mallory+Lane%2C+Franklin+TN+37067";
+
+		// var address = "https://google.com";
+
+		// var address = encodeURI(`${house.address.line}+ $
+		// 					{house.address.city}+${house.address.state_code}+ $
+		// 					{house.address.postal_code}`);
+
 		return (
-			<div className="App">
+			<div className="App-box">
+				<SearchProperties />
+				<br />
 				<ul>
-					{/* <SearchHouses items={this.state.houses} /> */}
 					{this.state.houses.map((house) => (
-						<li>{house.address.line}</li>
+						<li>
+							<a href={house.rdc_web_url} target="_blank">
+								{house.address.line}
+							</a>
+						</li>
 					))}
 				</ul>
 			</div>
