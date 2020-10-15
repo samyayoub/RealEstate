@@ -4,9 +4,6 @@ import $ from "jquery";
 
 import SearchProperties from "./SearchProperties";
 
-// import SearchHouses from "./SearchHouses";
-// import AddHouse from "./AddHouse";
-
 class App extends Component {
 	constructor() {
 		super();
