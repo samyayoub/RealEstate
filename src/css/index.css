@@ -43,3 +43,14 @@ code {
 img {
 	width: 100%;
 }
+
+label {
+	margin: 0.5%;
+	padding: 0.5%;
+}
+
+input,
+select {
+	border: 1px solid #919191;
+	border-radius: 7px;
+}
