@@ -8,7 +8,7 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			houses: [],
+			properties: [],
 		};
 	}
 
@@ -28,7 +28,7 @@ class App extends Component {
 
 		$.ajax(settings).done((response) => {
 			this.setState({
-				houses: response.properties,
+				properties: response.properties,
 			});
 		});
 	}
@@ -39,23 +39,45 @@ class App extends Component {
 
 		// var address = "https://google.com";
 
-		// var address = encodeURI(`${house.address.line}+ $
-		// 					{house.address.city}+${house.address.state_code}+ $
-		// 					{house.address.postal_code}`);
+		// var address = encodeURI(`${property.address.line}+ $
+		// 					{property.address.city}+${property.address.state_code}+ $
+		// 					{property.address.postal_code}`);
+
+		const listProperties = this.state.properties.map((property) => (
+			<div className="container">
+				{/* <div> */}
+				<a
+					href={property.rdc_web_url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{property.address.line}
+				</a>
+				{/* </div>
+				<div className="div2"> */}
+				<br />
+				<a
+					href={property.rdc_web_url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						alt=""
+						src={`${property.thumbnail}`}
+						width="400"
+						heigh="300"
+						mode="fit"
+					></img>
+				</a>
+				{/* </div> */}
+			</div>
+		));
 
 		return (
 			<div className="App-box">
 				<SearchProperties />
 				<br />
-				<ul>
-					{this.state.houses.map((house) => (
-						<li>
-							<a href={house.rdc_web_url} target="_blank">
-								{house.address.line}
-							</a>
-						</li>
-					))}
-				</ul>
+				{listProperties}
 			</div>
 		);
 	}
