@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import "../css/App.css";
 import SelectUSState from "react-select-us-states";
+import CurrencyFormat from "react-currency-format";
 
 class SearchProperties extends Component {
 	constructor() {
@@ -18,15 +19,40 @@ class SearchProperties extends Component {
 		// showing list of properties with link for more info
 		// by looping through all the data was fetched from database
 		const listProperties = this.props.properties.map((property) => (
-			<div className="container">
+			<div className="container List-Box">
 				<a
 					href={property.rdc_web_url}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					{property.address.line}
+					{/* Showing address of property */}
+					<h5>
+						{property.address.line}
+						<br />
+						{property.address.city},{property.address.state_code}{" "}
+						{property.address.postal_code}
+					</h5>
 				</a>
 				<br />
+				{/* Showing description of property */}
+				<h6>
+					Description:
+					<br />
+					{property.beds} bedrooms, {property.baths} baths
+					<br />
+					{property.building_size.size} {property.building_size.units}
+				</h6>
+				<h6>
+					Asking Price:{" "}
+					<CurrencyFormat
+						value={property.price}
+						displayType={"text"}
+						thousandSeparator={true}
+						prefix={"$"}
+					/>
+				</h6>
+
+				{/* Showing thumbnail of property (if avaiable) */}
 				<a
 					href={property.rdc_web_url}
 					target="_blank"
@@ -45,42 +71,44 @@ class SearchProperties extends Component {
 
 		return (
 			// Show fields for end user
-			<div className="App-box">
-				<div>
-					<form>
-						<label>
-							Enter City: <input type="text" name="city" />
-						</label>
-						<label>
-							Select a state:{" "}
-							<SelectUSState
-								id="myId"
-								className="myClassName"
-								onChange={this.setNewValue}
-							/>
-						</label>
-						<label>
-							Enter Zip Cose: <input type="number" name="zipCode" />
-						</label>
-						<label>
-							Enter Range:{" "}
-							<select>
-								<option value="5">5 Miles</option>
-								<option value="25">25 Miles</option>
-								<option value="50">50 Miles</option>
-								<option value="75">75 Miles</option>
-								<option value="100">100 Miles</option>
-							</select>
-						</label>
-					</form>
+			<div>
+				<div className="App-box">
+					<div>
+						<form>
+							<label>
+								Enter City: <input type="text" name="city" />
+							</label>
+							<label>
+								Select a state:{" "}
+								<SelectUSState
+									id="myId"
+									className="myClassName"
+									onChange={this.setNewValue}
+								/>
+							</label>
+							<label>
+								Enter Zip Cose: <input type="number" name="zipCode" />
+							</label>
+							<label>
+								Enter Range:{" "}
+								<select>
+									<option value="5">5 Miles</option>
+									<option value="25">25 Miles</option>
+									<option value="50">50 Miles</option>
+									<option value="75">75 Miles</option>
+									<option value="100">100 Miles</option>
+								</select>
+							</label>
+						</form>
+					</div>
+					<br />
+					<button
+						className="btn btn-primary"
+						title="Search properties in specific area"
+					>
+						Search Properties
+					</button>
 				</div>
-				<br />
-				<button
-					className="btn btn-primary"
-					title="Search properties in specific area"
-				>
-					Search Properties
-				</button>
 				<div>{listProperties}</div>
 			</div>
 		);
