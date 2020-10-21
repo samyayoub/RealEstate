@@ -19,7 +19,8 @@ class SearchProperties extends Component {
 		// showing list of properties with link for more info
 		// by looping through all the data was fetched from database
 		const listProperties = this.props.properties.map((property) => (
-			<div className="container List-Box">
+			<div className="container List-Box" key={property.property_id}>
+				{/* {console.log(property.listing_id)}; */}
 				<a
 					href={property.rdc_web_url}
 					target="_blank"
@@ -40,7 +41,7 @@ class SearchProperties extends Component {
 					<br />
 					{property.beds} bedrooms, {property.baths} baths
 					<br />
-					{property.building_size.size} {property.building_size.units}
+					{/* {property.building_size.size}, {property.building_size.units} */}
 				</h6>
 				<h6>
 					Asking Price:{" "}
@@ -51,7 +52,6 @@ class SearchProperties extends Component {
 						prefix={"$"}
 					/>
 				</h6>
-
 				{/* Showing thumbnail of property (if avaiable) */}
 				<a
 					href={property.rdc_web_url}
