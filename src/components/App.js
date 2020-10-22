@@ -49,7 +49,7 @@ class App extends Component {
 		// 					{property.address.postal_code}`);
 
 		return (
-			<div className="App-box">
+			<div className="app-box">
 				<SearchProperties properties={this.state.properties} />
 				<br />
 			</div>
