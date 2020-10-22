@@ -9,6 +9,10 @@ class App extends Component {
 		super();
 		this.state = {
 			properties: [],
+			// city: "",
+			// state: "",
+			// zipCode: "",
+			// range: "",
 		};
 	}
 

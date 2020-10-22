@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "../css/App.css";
 import SelectUSState from "react-select-us-states";
 import CurrencyFormat from "react-currency-format";
+import { FcSearch } from "react-icons/fc";
 
 class SearchProperties extends Component {
 	constructor() {
@@ -106,7 +107,7 @@ class SearchProperties extends Component {
 						className="btn btn-primary"
 						title="Search properties in specific area"
 					>
-						Search Properties
+						<FcSearch /> Search Properties
 					</button>
 				</div>
 				<div>{listProperties}</div>
