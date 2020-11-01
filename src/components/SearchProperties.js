@@ -9,11 +9,51 @@ class SearchProperties extends Component {
 	constructor() {
 		super();
 
+		this.state = {
+			city: "",
+			state: "",
+			zipCode: "",
+			radius: "",
+		};
+
 		this.setNewValue = this.setNewValue.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	setNewValue(newValue) {
-		console.log("this is the State code:" + newValue);
+		this.setState({
+			state: newValue,
+		});
+	}
+
+	handleChange(e) {
+		const target = e.target;
+		const value = target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value,
+		});
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		let tempValues = {
+			city: this.state.city,
+			state: this.state.state,
+			zipCode: this.state.zipCode,
+			radius: this.state.radius,
+		};
+
+		this.props.searchProperty(tempValues);
+
+		// this.setState({
+		// 	city: "",
+		// 	state: "",
+		// 	zipCode: "",
+		// 	radius: "",
+		// });
 	}
 
 	render() {
@@ -53,6 +93,7 @@ class SearchProperties extends Component {
 						prefix={"$"}
 					/>
 				</h6>
+
 				{/* Showing thumbnail of property (if avaiable) */}
 				<a
 					href={property.rdc_web_url}
@@ -74,41 +115,58 @@ class SearchProperties extends Component {
 			// Show fields for end user
 			<div>
 				<div className="list-box">
-					<div>
-						<form>
-							<label>
-								Enter City: <input type="text" name="city" />
-							</label>
-							<label>
-								Select a state:{" "}
-								<SelectUSState
-									id="myId"
-									className="myClassName"
-									onChange={this.setNewValue}
-								/>
-							</label>
-							<label>
-								Enter Zip Cose: <input type="number" name="zipCode" />
-							</label>
-							<label>
-								Enter Range:{" "}
-								<select>
-									<option value="5">5 Miles</option>
-									<option value="25">25 Miles</option>
-									<option value="50">50 Miles</option>
-									<option value="75">75 Miles</option>
-									<option value="100">100 Miles</option>
-								</select>
-							</label>
-						</form>
-					</div>
-					<br />
-					<button
-						className="btn btn-primary"
-						title="Search properties in specific area"
-					>
-						<FcSearch /> Search Properties
-					</button>
+					<form noValidate onSubmit={this.handleSubmit}>
+						<label>
+							Enter City:{" "}
+							<input
+								type="text"
+								name="city"
+								value={this.state.city}
+								onChange={this.handleChange}
+							/>
+						</label>
+						<label>
+							Select a state:{" "}
+							<SelectUSState
+								id="myId"
+								className="myClassName"
+								onChange={this.setNewValue}
+								value={this.setNewValue}
+							/>
+						</label>
+						<label>
+							Enter Zip Cose:{" "}
+							<input
+								type="number"
+								name="zipCode"
+								value={this.state.zipCode}
+								onChange={this.handleChange}
+							/>
+						</label>
+						<label>
+							Enter radius:{" "}
+							<select
+								type="number"
+								name="radius"
+								value={this.state.radius}
+								onChange={this.handleChange}
+							>
+								<option value="5">5 Miles</option>
+								<option value="25">25 Miles</option>
+								<option value="50">50 Miles</option>
+								<option value="75">75 Miles</option>
+								<option value="100">100 Miles</option>
+							</select>
+						</label>
+						<br />
+						<button
+							className="btn btn-primary"
+							title="Search properties in specific area"
+							// onClick={(e) => this.props.searchProps}
+						>
+							<FcSearch /> Search Properties
+						</button>
+					</form>
 				</div>
 				<div>{listProperties}</div>
 			</div>
