@@ -67,8 +67,8 @@ class App extends Component {
 		});
 	}
 
+	// check when parameters have changed
 	componentDidUpdate(prevProps, prevState) {
-		// check when parameters have changed
 		if (prevProps.data !== this.props.data) {
 			var settings = {
 				async: true,
