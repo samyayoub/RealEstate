@@ -3,6 +3,7 @@ import "../css/App.css";
 import $ from "jquery";
 
 import SearchProperties from "./SearchProperties";
+import SideNavbar from "./Sidenav.js";
 
 class App extends Component {
 	constructor() {
@@ -24,18 +25,18 @@ class App extends Component {
 	}
 
 	searchProperty(property) {
-		// var tempValues = {
-		// 	city: this.state.city,
-		// 	state: this.state.state,
-		// 	zipCode: this.state.zipCode,
-		// 	radius: this.state.radius,
-		// };
-
-		this.setState({
+		var tempValues = {
 			city: property.city,
 			state: property.state,
 			zipCode: property.zipCode,
 			radius: property.radius,
+		};
+
+		this.setState({
+			city: tempValues.city,
+			state: tempValues.state,
+			zipCode: tempValues.zipCode,
+			radius: tempValues.radius,
 		});
 
 		// console.log(property);
@@ -51,7 +52,7 @@ class App extends Component {
 			async: true,
 			crossDomain: true,
 			url:
-				"https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance&city=Nashville&limit=25&offset=0&state_code=TN",
+				"https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance&postal_code=37167&radius=5&city=Smyrna&limit=25&offset=0&state_code=TN",
 			method: "GET",
 			headers: {
 				"x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -69,11 +70,16 @@ class App extends Component {
 
 	// check when parameters have changed
 	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.data !== this.props.data) {
+		if (
+			prevState.city !== this.state.city ||
+			prevState.state !== this.state.state ||
+			prevState.zipCode !== this.state.zipCode ||
+			prevState.radius !== this.state.radius
+		) {
 			var settings = {
 				async: true,
 				crossDomain: true,
-				url: `https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance&city=${this.state.city}&limit=25&offset=0&state_code=${this.state.state}`,
+				url: `https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance&postal_code=${this.state.zipCode}&radius=${this.state.radius}&city=${this.state.city}&limit=25&offset=0&state_code=${this.state.state}`,
 				method: "GET",
 				headers: {
 					"x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -101,12 +107,17 @@ class App extends Component {
 		// 					{property.address.postal_code}`);
 
 		return (
-			<div className="app-box">
-				<SearchProperties
-					properties={this.state.properties}
-					searchProperty={this.searchProperty}
-				/>
-				<br />
+			<div>
+				<div>
+					<SideNavbar />
+				</div>
+				<div className="app-box">
+					<SearchProperties
+						properties={this.state.properties}
+						searchProperty={this.searchProperty}
+					/>
+					<br />
+				</div>
 			</div>
 		);
 	}

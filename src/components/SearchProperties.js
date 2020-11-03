@@ -82,7 +82,8 @@ class SearchProperties extends Component {
 					<br />
 					{property.beds} bedrooms, {property.baths} baths
 					<br />
-					{/* {property.building_size.size}, {property.building_size.units} */}
+					Size: {property.building_size.size}{" "}
+					{property.building_size.units}
 				</h6>
 				<h6>
 					<b>Asking Price: </b>
@@ -159,13 +160,15 @@ class SearchProperties extends Component {
 							</select>
 						</label>
 						<br />
-						<button
-							className="btn btn-primary"
-							title="Search properties in specific area"
-							// onClick={(e) => this.props.searchProps}
-						>
-							<FcSearch /> Search Properties
-						</button>
+						<div>
+							<button
+								className="btn btn-primary"
+								title="Search properties in specific area"
+								type="submit"
+							>
+								<FcSearch /> Search Properties
+							</button>
+						</div>
 					</form>
 				</div>
 				<div>{listProperties}</div>
