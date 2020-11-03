@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "../css/App.css";
 import $ from "jquery";
+import { Container, Sidebar } from "rsuite";
 
 import SearchProperties from "./SearchProperties";
 import SideNavbar from "./Sidenav.js";
+import "rsuite/lib/styles/index.less";
 
 class App extends Component {
 	constructor() {
@@ -108,15 +110,21 @@ class App extends Component {
 
 		return (
 			<div>
-				<div>
-					<SideNavbar />
-				</div>
-				<div className="app-box">
-					<SearchProperties
-						properties={this.state.properties}
-						searchProperty={this.searchProperty}
-					/>
-					<br />
+				<div className="show-container">
+					<Container>
+						<Sidebar>
+							<SideNavbar />
+						</Sidebar>
+						<Container>
+							<div className="app-box">
+								<SearchProperties
+									properties={this.state.properties}
+									searchProperty={this.searchProperty}
+								/>
+								<br />
+							</div>
+						</Container>
+					</Container>
 				</div>
 			</div>
 		);

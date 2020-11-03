@@ -1,6 +1,19 @@
 // import { render } from "@testing-library/react";
 import React from "react";
-import { Sidenav, Toggle, Nav, Icon, Dropdown } from "rsuite";
+import {
+	Sidenav,
+	Toggle,
+	Nav,
+	Icon,
+	Dropdown,
+	Navbar,
+	Container,
+	Sidebar,
+	Header,
+	Content,
+	Footer,
+} from "rsuite";
+import "rsuite/dist/styles/rsuite-default.css";
 
 class SideNavbar extends React.Component {
 	constructor() {
