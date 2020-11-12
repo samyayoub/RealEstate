@@ -110,21 +110,22 @@ class App extends Component {
 
 		return (
 			<div>
-				<div className="show-container">
-					<Container>
+				<div className="container">
+					{/* <Container>
 						<Sidebar>
 							<SideNavbar />
 						</Sidebar>
-						<Container>
-							<div className="app-box">
-								<SearchProperties
-									properties={this.state.properties}
-									searchProperty={this.searchProperty}
-								/>
-								<br />
-							</div>
-						</Container>
-					</Container>
+						<Container> */}
+					<div className="app-box">Average Around Me</div>
+					<div className="app-box">
+						<SearchProperties
+							properties={this.state.properties}
+							searchProperty={this.searchProperty}
+						/>
+						<br />
+					</div>
+					{/* </Container>
+					</Container> */}
 				</div>
 			</div>
 		);

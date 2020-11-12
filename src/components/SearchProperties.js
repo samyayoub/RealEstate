@@ -82,17 +82,17 @@ class SearchProperties extends Component {
 					<br />
 					{property.beds} bedrooms, {property.baths} baths
 					<br />
-					Size: {property.building_size.size}{" "}
-					{property.building_size.units}
+					{/* Size: {property.building_size.size}{" "}
+					{property.building_size.units} */}
 				</h6>
 				<h6>
 					<b>Asking Price: </b>
-					<CurrencyFormat
+					{/* <CurrencyFormat
 						value={property.price}
 						displayType={"text"}
 						thousandSeparator={true}
 						prefix={"$"}
-					/>
+					/> */}
 				</h6>
 
 				{/* Showing thumbnail of property (if avaiable) */}
