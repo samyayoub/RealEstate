@@ -61,14 +61,14 @@ code {
 	background: rgb(255, 255, 255);
 	/* border: 1px solid #ccc; */
 	border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
-	padding: 3%;
-	margin: 3%;
-	width: auto;
-	height: auto;
+	padding: 7%;
+	margin: 2.5%;
+	width: 250px;
+	height: 125px;
 	border-radius: 15px;
 }
 
-.list-box {
+.listing-box {
 	box-shadow: 0px 0px 5px rgba(151, 151, 151, 0.3);
 	-moz-box-shadow: 0px 0px 5px rgba(151, 151, 151, 0.3);
 	-webkit-box-shadow: 0px 0px 5px rgba(151, 151, 151, 0.3);
@@ -86,14 +86,14 @@ code {
 	-webkit-box-shadow: 0px 0px 5px rgba(151, 151, 151, 0.3);
 	-o-box-shadow: 0px 0px 5px rgba(151, 151, 151, 0.3);
 	display: grid;
-	grid-template-columns: repeat(1, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	grid-auto-rows: minmax(1fr, auto);
 	grid-gap: 20px;
 
 	border: 3px solid #ffffff;
 	border-radius: 7px;
 	padding: 2.5%;
-	margin-top: 1.5%;
+	margin: 3.5%;
 }
 
 img {

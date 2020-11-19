@@ -5,6 +5,99 @@ import SelectUSState from "react-select-us-states";
 import CurrencyFormat from "react-currency-format";
 import { FcSearch } from "react-icons/fc";
 
+import { Button, Modal, ButtonToolbar } from "react-bootstrap";
+
+class MyVerticallyCenteredModal extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			city: "",
+			state: "",
+			zipCode: "",
+			radius: "",
+		};
+	}
+
+	render() {
+		return (
+			<Modal
+				{...this.props}
+				size="lg"
+				aria-labelledby="contained-modal-title-vcenter"
+				centered
+			>
+				<Modal.Header closeButton>
+					<Modal.Title id="contained-modal-title-vcenter">
+						Enter your search criteria
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<div className="listing-box">
+						<form noValidate onSubmit={this.handleSubmit}>
+							<label>
+								Enter City:{" "}
+								<input
+									type="text"
+									name="city"
+									value={this.state.city}
+									onChange={this.handleChange}
+								/>
+							</label>
+							<label>
+								Select a state:{" "}
+								<SelectUSState
+									id="myId"
+									className="myClassName"
+									onChange={this.setNewValue}
+									value={this.setNewValue}
+								/>
+							</label>
+							<label>
+								Enter Zip Cose:{" "}
+								<input
+									type="number"
+									name="zipCode"
+									value={this.state.zipCode}
+									onChange={this.handleChange}
+								/>
+							</label>
+							<label>
+								Enter radius:{" "}
+								<select
+									type="number"
+									name="radius"
+									value={this.state.radius}
+									onChange={this.handleChange}
+								>
+									<option value="5">5 Miles</option>
+									<option value="25">25 Miles</option>
+									<option value="50">50 Miles</option>
+									<option value="75">75 Miles</option>
+									<option value="100">100 Miles</option>
+								</select>
+							</label>
+							<br />
+							<div>
+								<button
+									className="btn btn-primary"
+									title="Search properties in specific area"
+									type="submit"
+								>
+									<FcSearch /> Search Properties
+								</button>
+							</div>
+						</form>
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={this.props.onHide}>Close</Button>
+				</Modal.Footer>
+			</Modal>
+		);
+	}
+}
+
 class SearchProperties extends Component {
 	constructor() {
 		super();
@@ -14,6 +107,7 @@ class SearchProperties extends Component {
 			state: "",
 			zipCode: "",
 			radius: "",
+			modalShow: false,
 		};
 
 		this.setNewValue = this.setNewValue.bind(this);
@@ -57,6 +151,8 @@ class SearchProperties extends Component {
 	}
 
 	render() {
+		let modalClose = () => this.setState({ modalShow: false });
+
 		// showing list of properties with link for more info
 		// by looping through all the data was fetched from database
 		const listProperties = this.props.properties.map((property) => (
@@ -115,7 +211,21 @@ class SearchProperties extends Component {
 		return (
 			// Show fields for end user
 			<div>
-				<div className="list-box">
+				<ButtonToolbar>
+					<Button
+						variant="primary"
+						onClick={() => this.setState({ modalShow: true })}
+					>
+						Search Properties
+					</Button>
+
+					<MyVerticallyCenteredModal
+						show={this.state.modalShow}
+						onHide={modalClose}
+					/>
+				</ButtonToolbar>
+
+				{/* <div className="listing-box">
 					<form noValidate onSubmit={this.handleSubmit}>
 						<label>
 							Enter City:{" "}
@@ -170,8 +280,8 @@ class SearchProperties extends Component {
 							</button>
 						</div>
 					</form>
-				</div>
-				<div>{listProperties}</div>
+				</div> */}
+				{/* <div>{listProperties}</div> */}
 			</div>
 		);
 	}

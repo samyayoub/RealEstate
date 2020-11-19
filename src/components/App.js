@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "../css/App.css";
 import $ from "jquery";
-import { Container, Sidebar } from "rsuite";
+// import { Container, Sidebar } from "rsuite";
 
 import SearchProperties from "./SearchProperties";
-import SideNavbar from "./Sidenav.js";
+// import SideNavbar from "./Sidenav.js";
 import "rsuite/lib/styles/index.less";
 
 class App extends Component {
