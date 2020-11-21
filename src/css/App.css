@@ -66,6 +66,11 @@ code {
 	width: 250px;
 	height: 125px;
 	border-radius: 15px;
+	text-align: center;
+}
+
+.app-box:hover {
+	cursor: pointer;
 }
 
 .listing-box {
@@ -94,6 +99,7 @@ code {
 	border-radius: 7px;
 	padding: 2.5%;
 	margin: 3.5%;
+	width: auto;
 }
 
 img {
@@ -113,5 +119,5 @@ select {
 }
 
 button {
-	margin: 2%;
+	margin: 3.5%;
 }

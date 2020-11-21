@@ -211,13 +211,17 @@ class SearchProperties extends Component {
 		return (
 			// Show fields for end user
 			<div>
-				<ButtonToolbar>
-					<Button
-						variant="primary"
-						onClick={() => this.setState({ modalShow: true })}
-					>
+				<ButtonToolbar
+					variant="success"
+					onClick={() => this.setState({ modalShow: true })}
+					block
+				>
+					<h5>
+						<FcSearch />
+						<br />
+						<br />
 						Search Properties
-					</Button>
+					</h5>
 
 					<MyVerticallyCenteredModal
 						show={this.state.modalShow}
