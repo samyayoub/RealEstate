@@ -7,6 +7,7 @@ import { FcSearch } from "react-icons/fc";
 
 import { Button, Modal, ButtonToolbar } from "react-bootstrap";
 
+// Creating Modal
 class MyVerticallyCenteredModal extends React.Component {
 	constructor() {
 		super();
@@ -216,12 +217,12 @@ class SearchProperties extends Component {
 					onClick={() => this.setState({ modalShow: true })}
 					block
 				>
-					<h5>
+					<div>
 						<FcSearch />
 						<br />
 						<br />
 						Search Properties
-					</h5>
+					</div>
 
 					<MyVerticallyCenteredModal
 						show={this.state.modalShow}

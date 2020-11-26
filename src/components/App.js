@@ -109,24 +109,23 @@ class App extends Component {
 		// 					{property.address.postal_code}`);
 
 		return (
-			<div>
-				<div className="container">
-					{/* <Container>
+			<div className="main-container">
+				{/* <Container>
 						<Sidebar>
 							<SideNavbar />
 						</Sidebar>
 						<Container> */}
-					<div className="app-box">Average Around Me</div>
-					<div className="app-box">
-						<SearchProperties
-							properties={this.state.properties}
-							searchProperty={this.searchProperty}
-						/>
-						<br />
-					</div>
-					{/* </Container>
-					</Container> */}
+				<div className="feature-container">Average Around Me</div>
+				<div className="feature-container">
+					<SearchProperties
+						properties={this.state.properties}
+						searchProperty={this.searchProperty}
+					/>
+					<br />
 				</div>
+
+				{/* </Container>
+					</Container> */}
 			</div>
 		);
 	}
