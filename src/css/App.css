@@ -102,6 +102,7 @@ code {
 	background: rgb(255, 255, 255);
 	/* border: 1px solid #ccc; */
 	border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+	margin: 3%;
 	padding: 3%;
 	border-radius: 15px;
 }

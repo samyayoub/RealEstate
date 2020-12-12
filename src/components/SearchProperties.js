@@ -4,116 +4,30 @@ import "../css/App.css";
 import SelectUSState from "react-select-us-states";
 import CurrencyFormat from "react-currency-format";
 import { FcSearch } from "react-icons/fc";
-
-import { Button, Modal, ButtonToolbar } from "react-bootstrap";
-
-// Creating Modal
-class MyVerticallyCenteredModal extends React.Component {
-	constructor() {
-		super();
-
-		this.state = {
-			city: "",
-			state: "",
-			zipCode: "",
-			radius: "",
-		};
-	}
-
-	render() {
-		return (
-			<Modal
-				{...this.props}
-				size="lg"
-				aria-labelledby="contained-modal-title-vcenter"
-				centered
-			>
-				<Modal.Header closeButton>
-					<Modal.Title id="contained-modal-title-vcenter">
-						Enter your search criteria
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<div className="listing-box">
-						<form noValidate onSubmit={this.handleSubmit}>
-							<label>
-								Enter City:{" "}
-								<input
-									type="text"
-									name="city"
-									value={this.state.city}
-									onChange={this.handleChange}
-								/>
-							</label>
-							<label>
-								Select a state:{" "}
-								<SelectUSState
-									id="myId"
-									className="myClassName"
-									onChange={this.setNewValue}
-									value={this.setNewValue}
-								/>
-							</label>
-							<label>
-								Enter Zip Cose:{" "}
-								<input
-									type="number"
-									name="zipCode"
-									value={this.state.zipCode}
-									onChange={this.handleChange}
-								/>
-							</label>
-							<label>
-								Enter radius:{" "}
-								<select
-									type="number"
-									name="radius"
-									value={this.state.radius}
-									onChange={this.handleChange}
-								>
-									<option value="5">5 Miles</option>
-									<option value="25">25 Miles</option>
-									<option value="50">50 Miles</option>
-									<option value="75">75 Miles</option>
-									<option value="100">100 Miles</option>
-								</select>
-							</label>
-							<br />
-							<div>
-								<button
-									className="btn btn-primary"
-									title="Search properties in specific area"
-									type="submit"
-								>
-									<FcSearch /> Search Properties
-								</button>
-							</div>
-						</form>
-					</div>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={this.props.onHide}>Close</Button>
-				</Modal.Footer>
-			</Modal>
-		);
-	}
-}
+import MyModalComponent from "../components/Modal";
+import { Button } from "react-bootstrap";
 
 class SearchProperties extends Component {
 	constructor() {
 		super();
 
 		this.state = {
+			name: "",
 			city: "",
 			state: "",
 			zipCode: "",
 			radius: "",
-			modalShow: false,
+			show: false,
+			title: "",
+			body: "",
+			data: [],
 		};
 
 		this.setNewValue = this.setNewValue.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleShow = this.handleShow.bind(this);
+		this.handleShowProperties = this.handleShowProperties.bind(this);
 	}
 
 	setNewValue(newValue) {
@@ -134,6 +48,7 @@ class SearchProperties extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
+		e.target.reset();
 		let tempValues = {
 			city: this.state.city,
 			state: this.state.state,
@@ -142,22 +57,11 @@ class SearchProperties extends Component {
 		};
 
 		this.props.searchProperty(tempValues);
-
-		// this.setState({
-		// 	city: "",
-		// 	state: "",
-		// 	zipCode: "",
-		// 	radius: "",
-		// });
 	}
 
-	render() {
-		let modalClose = () => this.setState({ modalShow: false });
-
-		// showing list of properties with link for more info
-		// by looping through all the data was fetched from database
+	handleShowProperties = () => {
 		const listProperties = this.props.properties.map((property) => (
-			<div className="container" key={property.property_id}>
+			<div className="listing-box" key={property.property_id}>
 				{/* {console.log(property.listing_id)}; */}
 				<a
 					href={property.rdc_web_url}
@@ -184,12 +88,12 @@ class SearchProperties extends Component {
 				</h6>
 				<h6>
 					<b>Asking Price: </b>
-					{/* <CurrencyFormat
+					<CurrencyFormat
 						value={property.price}
 						displayType={"text"}
 						thousandSeparator={true}
 						prefix={"$"}
-					/> */}
+					/>
 				</h6>
 
 				{/* Showing thumbnail of property (if avaiable) */}
@@ -208,85 +112,93 @@ class SearchProperties extends Component {
 				</a>
 			</div>
 		));
+		this.setState({
+			data: listProperties,
+		});
+	};
+
+	handleShow = () => {
+		const myObject = (
+			<div className="listing-box">
+				<form
+					noValidate
+					onSubmit={this.handleSubmit}
+					onChange={this.handleChange}
+				>
+					<label>
+						Enter City: <input type="text" name="city" />
+					</label>
+					<label>
+						Select a state:{" "}
+						<SelectUSState
+							id="myId"
+							className="myClassName"
+							onChange={this.setNewValue}
+							value={this.setNewValue}
+						/>
+					</label>
+					<label>
+						Enter Zip Code: <input type="number" name="zipCode" />
+					</label>
+					<label>
+						Enter radius:{" "}
+						<select type="number" name="radius">
+							<option value="5">5 Miles</option>
+							<option value="25">25 Miles</option>
+							<option value="50">50 Miles</option>
+							<option value="75">75 Miles</option>
+							<option value="100">100 Miles</option>
+						</select>
+					</label>
+					<br />
+					<div>
+						<button
+							className="btn btn-primary"
+							title="Search properties in specific area"
+							type="submit"
+							onClick={this.handleShowProperties}
+						>
+							<FcSearch /> Search Properties
+						</button>
+					</div>
+				</form>
+			</div>
+		);
+
+		this.setState({
+			show: true,
+			title: "Search Properties",
+			body: myObject,
+			// data: myObject,
+		});
+	};
+
+	handleClose = (fromModal) => {
+		// alert(fromModal.msg);
+
+		this.setState({
+			show: false,
+		});
+	};
+
+	render() {
+		// showing list of properties with link for more info
+		// by looping through all the data was fetched from database
 
 		return (
-			// Show fields for end user
 			<div>
-				<ButtonToolbar
-					variant="success"
-					onClick={() => this.setState({ modalShow: true })}
-					block
-				>
-					<div>
-						<FcSearch />
-						<br />
-						<br />
-						Search Properties
-					</div>
+				<Button variant="primary" onClick={this.handleShow}>
+					Search Properties
+				</Button>
 
-					<MyVerticallyCenteredModal
-						show={this.state.modalShow}
-						onHide={modalClose}
-					/>
-				</ButtonToolbar>
-
-				{/* <div className="listing-box">
-					<form noValidate onSubmit={this.handleSubmit}>
-						<label>
-							Enter City:{" "}
-							<input
-								type="text"
-								name="city"
-								value={this.state.city}
-								onChange={this.handleChange}
-							/>
-						</label>
-						<label>
-							Select a state:{" "}
-							<SelectUSState
-								id="myId"
-								className="myClassName"
-								onChange={this.setNewValue}
-								value={this.setNewValue}
-							/>
-						</label>
-						<label>
-							Enter Zip Cose:{" "}
-							<input
-								type="number"
-								name="zipCode"
-								value={this.state.zipCode}
-								onChange={this.handleChange}
-							/>
-						</label>
-						<label>
-							Enter radius:{" "}
-							<select
-								type="number"
-								name="radius"
-								value={this.state.radius}
-								onChange={this.handleChange}
-							>
-								<option value="5">5 Miles</option>
-								<option value="25">25 Miles</option>
-								<option value="50">50 Miles</option>
-								<option value="75">75 Miles</option>
-								<option value="100">100 Miles</option>
-							</select>
-						</label>
-						<br />
-						<div>
-							<button
-								className="btn btn-primary"
-								title="Search properties in specific area"
-								type="submit"
-							>
-								<FcSearch /> Search Properties
-							</button>
-						</div>
-					</form>
-				</div> */}
-				{/* <div>{listProperties}</div> */}
+				<MyModalComponent
+					show={this.state.show}
+					title={this.state.title}
+					body={this.state.body}
+					data={this.state.data}
+					onClick={this.handleClose}
+					onHide={this.handleClose}
+				/>
 			</div>
 		);
 	}

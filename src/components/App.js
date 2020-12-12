@@ -4,6 +4,7 @@ import $ from "jquery";
 // import { Container, Sidebar } from "rsuite";
 
 import SearchProperties from "./SearchProperties";
+// import MyModalComponent from "./Modal";
 // import SideNavbar from "./Sidenav.js";
 import "rsuite/lib/styles/index.less";
 
@@ -81,7 +82,7 @@ class App extends Component {
 			var settings = {
 				async: true,
 				crossDomain: true,
-				url: `https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance&postal_code=${this.state.zipCode}&radius=${this.state.radius}&city=${this.state.city}&limit=25&offset=0&state_code=${this.state.state}`,
+				url: `https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance&postal_code=${this.state.zipCode}&radius=${this.state.radius}&city=${this.state.city}&limit=100&offset=0&state_code=${this.state.state}`,
 				method: "GET",
 				headers: {
 					"x-rapidapi-host": "realtor.p.rapidapi.com",
